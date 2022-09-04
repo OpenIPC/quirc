@@ -26,19 +26,16 @@ libquirc.a: $(LIB_OBJ)
 .c.o:
 	$(CC) $(QUIRC_CFLAGS) -o $@ -c $<
 
-install: libquirc.a libquirc.so
+install: libquirc.a
 	install -o root -g root -m 0644 lib/quirc.h $(DESTDIR)$(PREFIX)/include
 	install -o root -g root -m 0644 libquirc.a $(DESTDIR)$(PREFIX)/lib
-	install -o root -g root -m 0755 libquirc.so $(DESTDIR)$(PREFIX)/lib
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/include/quirc.h
-	rm -f $(DESTDIR)$(PREFIX)/lib/libquirc.so
 	rm -f $(DESTDIR)$(PREFIX)/lib/libquirc.a
 
 clean:
 	rm -f */*.o
 	rm -f */*.lo
 	rm -f libquirc.a
-	rm -f libquirc.so
 	rm -f qrscan
