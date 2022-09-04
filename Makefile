@@ -1,5 +1,7 @@
 CC ?= $(CC)
 AR ?= $(AR)
+CXX ?= $(CXX)
+LD ?= $(LD)
 
 PREFIX ?= /usr
 CFLAGS ?= -O1 -Wall -fPIC
@@ -34,7 +36,7 @@ libquirc.so: $(LIB_OBJ)
 
 .SUFFIXES: .cxx
 .cxx.o:
-	$(CC) $(QUIRC_CXXFLAGS) -o $@ -c $<
+	$(CXX) $(QUIRC_CXXFLAGS) -o $@ -c $<
 
 install: libquirc.a libquirc.so
 	install -o root -g root -m 0644 lib/quirc.h $(DESTDIR)$(PREFIX)/include
