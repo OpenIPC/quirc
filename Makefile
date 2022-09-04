@@ -1,7 +1,6 @@
 CC ?= $(CC)
 AR ?= $(AR)
 
-PREFIX ?= /usr
 CFLAGS ?= -O1 -Wall -fPIC
 QUIRC_CFLAGS = -Ilib $(CFLAGS)
 
@@ -27,13 +26,12 @@ libquirc.a: $(LIB_OBJ)
 	$(CC) $(QUIRC_CFLAGS) -o $@ -c $<
 
 install: libquirc.a
-	install -m 0644 lib/quirc.h $(DESTDIR)$(PREFIX)/include
-	install -m 0644 libquirc.a $(DESTDIR)$(PREFIX)/lib
-	install -m 0755 qrscan $(DESTDIR)$(PREFIX)/sbin
+	install -m 0644 libquirc.a $(DESTDIR)/usr/lib
+	install -m 0755 qrscan $(DESTDIR)/usr/sbin
 
 uninstall:
-	rm -f $(DESTDIR)$(PREFIX)/include/quirc.h
-	rm -f $(DESTDIR)$(PREFIX)/lib/libquirc.a
+	rm -f $(DESTDIR)/usr/sbin/qrscan
+	rm -f $(DESTDIR)/usr/lib/libquirc.a
 
 clean:
 	rm -f */*.o
