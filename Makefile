@@ -6,7 +6,6 @@ LD ?= $(LD)
 PREFIX ?= /usr
 CFLAGS ?= -O1 -Wall -fPIC
 QUIRC_CFLAGS = -Ilib $(CFLAGS)
-QUIRC_CXXFLAGS = $(QUIRC_CFLAGS) --std=c++17
 
 LIB_OBJ = \
     lib/decode.o \
@@ -33,10 +32,6 @@ libquirc.so: $(LIB_OBJ)
 
 .c.o:
 	$(CC) $(QUIRC_CFLAGS) -o $@ -c $<
-
-.SUFFIXES: .cxx
-.cxx.o:
-	$(CXX) $(QUIRC_CXXFLAGS) -o $@ -c $<
 
 install: libquirc.a libquirc.so
 	install -o root -g root -m 0644 lib/quirc.h $(DESTDIR)$(PREFIX)/include
