@@ -14,45 +14,27 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#ifndef DTHASH_H_
-#define DTHASH_H_
+#ifndef DBGUTIL_H_
+#define DBGUTIL_H_
 
-#include <stdint.h>
-#include <time.h>
 #include "quirc.h"
-
-/* Detector hash.
- *
- * This structure keeps track of codes that have been seen within the
- * last N seconds, and allows us to print out codes at a reasonable
- * rate as we see them.
- */
-#define DTHASH_MAX_CODES	32
-
-struct dthash_code {
-	uint32_t		hash;
-	time_t			when;
-};
-
-struct dthash {
-	struct dthash_code	codes[DTHASH_MAX_CODES];
-	int			count;
-	int			timeout;
-};
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* Initialise a detector hash with the given timeout. */
-void dthash_init(struct dthash *d, int timeout);
+/* Dump decoded information on stdout. */
+void dump_data(const struct quirc_data *data);
 
-/* When a code is discovered, this function should be called to see if
- * it should be printed. The hash will record having seen the code, and
- * return non-zero if it's the first time we've seen it within the
- * configured timeout period.
+/* Dump a grid cell map on stdout. */
+void dump_cells(const struct quirc_code *code);
+
+/* Read a JPEG image into the decoder.
+ *
+ * Note that you must call quirc_end() if the function returns
+ * successfully (0).
  */
-int dthash_seen(struct dthash *d, const struct quirc_data *data);
+int load_jpeg(struct quirc *q, const char *filename);
 
 #ifdef __cplusplus
 }
