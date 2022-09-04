@@ -1,5 +1,5 @@
-CC ?= gcc
-AR ?= ar
+CC ?= $(CC)
+AR ?= $(AR)
 
 PREFIX ?= /usr
 CFLAGS ?= -O1 -Wall -fPIC
