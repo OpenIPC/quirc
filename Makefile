@@ -1,7 +1,5 @@
 CC ?= $(CC)
 AR ?= $(AR)
-CXX ?= $(CXX)
-LD ?= $(LD)
 
 PREFIX ?= /usr
 CFLAGS ?= -O1 -Wall -fPIC
@@ -15,7 +13,7 @@ LIB_OBJ = \
 
 .PHONY: all install uninstall clean
 
-all: libquirc.so qrscan
+all: libquirc.a qrscan
 
 qrscan: bin/dbgutil.o bin/qrscan.o libquirc.a
 	$(CC) -o $@ bin/dbgutil.o bin/qrscan.o libquirc.a $(LDFLAGS) -lm -ljpeg
@@ -24,11 +22,6 @@ libquirc.a: $(LIB_OBJ)
 	rm -f $@
 	$(AR) cr $@ $(LIB_OBJ)
 	ranlib $@
-
-.PHONY: libquirc.so
-
-libquirc.so: $(LIB_OBJ)
-	$(CC) -shared -o $@ $(LIB_OBJ) $(LDFLAGS) -lm
 
 .c.o:
 	$(CC) $(QUIRC_CFLAGS) -o $@ -c $<
