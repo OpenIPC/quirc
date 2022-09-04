@@ -1,9 +1,6 @@
 CC ?= gcc
 AR ?= ar
 
-#CC := /home/cronyx/openipc/firmware/output/host/bin/arm-openipc-linux-musleabi-gcc-7.5.0.br_real
-#AR := /home/cronyx/openipc/firmware/output/host/bin/arm-openipc-linux-musleabi-ar
-
 PREFIX ?= /usr
 CFLAGS ?= -O1 -Wall -fPIC
 QUIRC_CFLAGS = -Ilib $(CFLAGS)
